@@ -11,27 +11,18 @@ class User < ApplicationRecord
   has_many :questions
 
   validates :email, presence: true,
-            uniqueness: true,
+            uniqueness: { case_sensitive: false },
             format: { with: VALID_EMAIL_REGEX }
   validates :username, presence: true,
-            uniqueness: true,
+            uniqueness: { case_sensitive: false },
             length: { minimum: 2, maximum: 40 },
             format: { with: VALID_USER_REGEX }
   validates_presence_of :password, on: :create
   validates_confirmation_of :password
 
   before_save :encrypt_password
-
-  def encrypt_password
-    if password.present?
-      self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
-      self.password_hash = User.hash_to_string(
-        OpenSSL::PKCS5.pbkdf2_hmac(
-          password, password_salt, ITERATIONS, DIGEST.length, DIGEST
-        )
-      )
-    end
-  end
+  before_save :username_downcase
+  before_save :email_downcase
 
   def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
@@ -45,8 +36,29 @@ class User < ApplicationRecord
         password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST
       )
     )
-
     return user if user.password_hash == hashed_password
+
     nil
+  end
+
+  def encrypt_password
+    if password.present?
+      self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
+      self.password_hash = User.hash_to_string(
+        OpenSSL::PKCS5.pbkdf2_hmac(
+          password, password_salt, ITERATIONS, DIGEST.length, DIGEST
+        )
+      )
+    end
+  end
+
+  private
+
+  def username_downcase
+    self.username&.downcase!
+  end
+
+  def email_downcase
+    self.email&.downcase!
   end
 end
