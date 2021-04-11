@@ -29,16 +29,15 @@ class User < ApplicationRecord
   end
 
   def self.authenticate(email, password)
-    user = find_by(email: email.downcase)
-    return nil unless user.present?
+    user = find_by(email: email&.downcase)
+    return unless user.present?
     hashed_password = User.hash_to_string(
       OpenSSL::PKCS5.pbkdf2_hmac(
         password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST
       )
     )
-    return user if user.password_hash == hashed_password
 
-    nil
+    user if user.password_hash == hashed_password
   end
 
   private

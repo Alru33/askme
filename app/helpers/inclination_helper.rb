@@ -1,17 +1,16 @@
 module InclinationHelper
-  def incline(number, word, word1, word2)
+  def incline(number, nominative, genitive_singular, genitive_plural)
     last_two_digits = number % 100
-
-    return word2 if (11..14).include?(last_two_digits)
-
     last_digit = number % 10
 
+    return genitive_plural if (11..14).include?(last_two_digits)
+
     if last_digit == 1
-      word
+      nominative
     elsif (2..4).include?(last_digit)
-      word1
+      genitive_singular
     else
-      word2
+      genitive_plural
     end
   end
 end
