@@ -11,18 +11,18 @@ class User < ApplicationRecord
   has_many :questions
 
   validates :email, presence: true,
-            uniqueness: { case_sensitive: false },
+            uniqueness: true,
             format: { with: VALID_EMAIL_REGEX }
   validates :username, presence: true,
-            uniqueness: { case_sensitive: false },
+            uniqueness: true,
             length: { minimum: 2, maximum: 40 },
             format: { with: VALID_USER_REGEX }
   validates_presence_of :password, on: :create
   validates_confirmation_of :password
 
   before_save :encrypt_password
-  before_save :username_downcase
-  before_save :email_downcase
+  before_validation :username_downcase
+  before_validation :email_downcase
 
   def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
@@ -41,6 +41,8 @@ class User < ApplicationRecord
     nil
   end
 
+  private
+
   def encrypt_password
     if password.present?
       self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
@@ -52,13 +54,11 @@ class User < ApplicationRecord
     end
   end
 
-  private
-
   def username_downcase
-    self.username&.downcase!
+    username&.downcase!
   end
 
   def email_downcase
-    self.email&.downcase!
+    email&.downcase!
   end
 end
