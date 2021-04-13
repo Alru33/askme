@@ -1,35 +1,26 @@
 class UsersController < ApplicationController
   def index
-    @users = [
-      User.new(
-        id: 1,
-        name: 'Aleksey',
-        username: '@alex',
-        avatar_url: 'https://png.pngtree.com/png-clipart/20210328/original/' \
-        'pngtree-watercolor-vacuum-lion-avatar-png-image_6169183.jpg'
-      ),
-      User.new(id: 2, name: 'Arnold', username: '@artist')
-    ]
+    @users = User.all
   end
 
   def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
   end
 
   def edit
   end
 
   def show
-    @user = User.new(
-      name: 'Aleksey',
-      username: 'alex',
-      avatar_url: 'https://png.pngtree.com/png-clipart/20210328/original/' \
-        'pngtree-watercolor-vacuum-lion-avatar-png-image_6169183.jpg'
-    )
-    @questions = [
-      Question.new(text: 'Как дела?', created_at: Date.parse('10.04.2021')),
-      Question.new(text: 'Как успехи?', created_at: Date.parse('10.04.2021'))
-    ]
+  end
 
-    @new_question = Question.new
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :name, :username, :avatar_url)
   end
 end
