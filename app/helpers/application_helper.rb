@@ -1,9 +1,14 @@
 module ApplicationHelper
   def user_avatar(user)
-    user.avatar_url ||= asset_path 'avatar.png'
+    if user.avatar_url.present?
+      user.avatar_url
+    else
+      asset_path 'avatar.png'
+    end
   end
 
-  def questions_number
-    @questions.size
+  def fa_icon(icon_class)
+    content_tag 'span', '', class: "fa fa-#{icon_class}"
   end
+
 end
