@@ -7,6 +7,7 @@ ruby '2.7.2'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
+gem 'rails_12factor'
 gem 'uglifier'
 
 # Use SCSS for stylesheets
