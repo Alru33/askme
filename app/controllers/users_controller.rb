@@ -44,6 +44,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy if session[:user_id] == @user.id
+    redirect_to root_path, notice: 'Ваш профиль удален.'
+  end
+
   private
 
   def authorize_user
