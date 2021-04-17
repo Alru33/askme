@@ -7,6 +7,10 @@ module ApplicationHelper
     end
   end
 
+  def favorite_color(user)
+    user.favorite_color
+  end
+
   def fa_icon(icon_class)
     content_tag 'span', '', class: "fa fa-#{icon_class}"
   end
