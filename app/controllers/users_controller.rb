@@ -45,7 +45,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy if session[:user_id] == @user.id
+    @user.destroy
+    session[:user_id] == nil
     redirect_to root_path, notice: 'Ваш профиль удален.'
   end
 
