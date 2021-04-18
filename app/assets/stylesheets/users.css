@@ -1,6 +1,15 @@
 .users-list-item {
   display: inline-block;
 }
+.user-link-delete-profile {
+  color: #b0b0b0;
+  font-size: smaller;
+  border: 1px solid #999999;
+  border-radius: 2px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  text-align: center;
+}
 
 .user-header {
   padding: 20px 0;

@@ -15,7 +15,7 @@ module ApplicationHelper
     content_tag 'span', '', class: "fa fa-#{icon_class}"
   end
 
-  def writer_name(writer_id)
-    User.find_by(id: writer_id)&.username
+  def author(author_id)
+    User.find_by(id: author_id)&.username
   end
 end

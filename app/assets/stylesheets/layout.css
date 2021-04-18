@@ -42,3 +42,9 @@ a {
   font-size: 20px;
   color: #dc554f;
 }
+
+.buttons-block {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
