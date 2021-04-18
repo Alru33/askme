@@ -19,6 +19,7 @@ class User < ApplicationRecord
             uniqueness: true,
             length: { minimum: 2, maximum: 40 },
             format: { with: VALID_USER_REGEX }
+  validates :favorite_color, format: { with: /\A#\h{6}\z/}
   validates_presence_of :password, on: :create
   validates_confirmation_of :password
 
