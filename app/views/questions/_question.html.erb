@@ -14,10 +14,10 @@
       <%= l(question.created_at, format: :short)  %>
 
       <span>| Вопрос задал:</span>
-      <% if author(question.author_id).present? %>
-        <%= link_to author(question.author_id) , user_path(question.author_id) %>
+      <% if question.author %>
+        <%= link_to question.author.username, user_path(question.author) %>
       <% else %>
-        <%= 'Гость' %>
+        <span>Гость</span>
       <% end %>
     </div>
   </div>

@@ -14,8 +14,4 @@ module ApplicationHelper
   def fa_icon(icon_class)
     content_tag 'span', '', class: "fa fa-#{icon_class}"
   end
-
-  def author(author_id)
-    User.find_by(id: author_id)&.username
-  end
 end
