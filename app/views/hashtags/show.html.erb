@@ -1,0 +1,11 @@
+<div class="user-header text-center">
+  <div class="title-medium">
+    <h3> Вопросы с хэштегом: <%= @hashtag.name %></h3>
+
+    <div class="question-text text-lead">
+      <% @questions.each do |question| %>
+        <%= render partial: 'questions/question', object: question %>
+      <% end %>
+    </div>
+  </div>
+</div>

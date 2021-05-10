@@ -3,6 +3,8 @@ require 'openssl'
 class User < ApplicationRecord
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest::SHA256.new
+
+  VALID_COLOR_REGEX = /\A#\h{6}\z/
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_USER_REGEX = /\A[a-z0-9_]+\z/i
 
@@ -19,7 +21,7 @@ class User < ApplicationRecord
             uniqueness: true,
             length: { minimum: 2, maximum: 40 },
             format: { with: VALID_USER_REGEX }
-  validates :favorite_color, format: { with: /\A#\h{6}\z/ }
+  validates :favorite_color, format: { with: VALID_COLOR_REGEX }
   validates_presence_of :password, on: :create
   validates_confirmation_of :password
 
