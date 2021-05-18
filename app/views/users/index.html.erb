@@ -14,7 +14,7 @@
     <h1 class="title-medium">Хэштеги</h1>
     <% if @hashtags.present? %>
       <% @hashtags.each do |hashtag| %>
-        <%= link_to "#{hashtag.name}", hashtag_path(hashtag.name), class:
+        <%= link_to "##{hashtag.name}", hashtag_path(hashtag.name), class:
           'hashtag text-lead' %>
       <% end %>
     <% end %>
