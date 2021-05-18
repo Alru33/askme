@@ -6,5 +6,5 @@ class Hashtag < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :user_questions, -> { joins(:questions) }
+  scope :with_questions, -> { joins(:questions).distinct }
 end
