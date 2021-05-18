@@ -5,6 +5,14 @@
     <div class="question-text text-lead">
       <% @questions.each do |question| %>
         <%= render partial: 'questions/question', object: question %>
+
+        <div class="question">
+          <div class="question-content">
+            <div class="question-date">
+                <%= link_to question.user.username, user_path(question.user) %>
+            </div>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
