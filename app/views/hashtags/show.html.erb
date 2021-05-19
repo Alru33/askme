@@ -1,19 +1,17 @@
 <div class="user-header text-center">
   <div class="title-medium">
-    <h3> Вопросы с хэштегом: <%= @hashtag.name %></h3>
+    <h3>Хэштег: <%= @hashtag.name %></h3>
 
-    <div class="question-text text-lead">
-      <% @questions.each do |question| %>
-        <%= render partial: 'questions/question', object: question %>
-
-        <div class="question">
-          <div class="question-content">
-            <div class="question-date">
-                <%= link_to question.user.username, user_path(question.user) %>
-            </div>
+    <div class="content-wrapper buffer-both">
+      <div class="question-text text-lead">
+        <% @questions.each do |question| %>
+          <div class="questions-list">
+            Вопрос задан пользователю <%= link_to question.user.username, user_path(question.user)%>:
           </div>
-        </div>
-      <% end %>
+
+          <%= render partial: 'questions/question', object: question %>
+       <% end %>
+      </div>
     </div>
   </div>
 </div>
