@@ -10,6 +10,7 @@ gem 'puma', '~> 5.0'
 gem 'rails_12factor'
 gem 'uglifier'
 gem 'pry'
+gem 'recaptcha'
 
 # Use SCSS for stylesheets
 gem 'webpacker', '~> 5.0'
